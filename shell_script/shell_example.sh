@@ -57,3 +57,8 @@ echo "remaining orgument = $@"
 }
 example_1 one two three four five six
 
+#USeful keyword 
+
+basename return filename only from full file path
+dirname  return dir path where file exit and skip file name
+realpath return full path if file name given as orgument
