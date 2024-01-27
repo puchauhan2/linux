@@ -26,6 +26,9 @@ done < cities.csv
 
 cat cities.csv | awk 'NR!=1 {print}' | while IFS="," read f1 f2 f3 ; do echo $f1; done
 
+
+awk -F , '{print $2}' file.csv # -F is seperator
+
 ----------------------------------------------------------
 # argument in numbers 
 
@@ -55,10 +58,34 @@ shift
 echo "remaining orgument = $@"
 
 }
-example_1 one two three four five six
+example_1 one two three four five sixff
 
 #USeful keyword 
 
 basename return filename only from full file path
 dirname  return dir path where file exit and skip file name
 realpath return full path if file name given as orgument
+
+# Repalce word in a file
+
+
+tr "replace_word" "replace_tos" < file.txt
+tr [:lower:] [:upper:] < file.txt # convert lower to upper
+tr [:upper:] [:lower:] < file.txt # convert upper to lower
+tr -d "word to delete" < file.txt
+
+# TO increse file size 
+
+truncate -s 50M file.txt # fill with random data and increase file size
+
+# print horizontal lines to verticle 
+
+echo abcd | fold -w1
+
+# run script in backfround
+
+nohup ./script > /dev/null &
+
+# to check user exist or not 
+
+id "username"
