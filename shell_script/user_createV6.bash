@@ -4,6 +4,19 @@ username=trianz-admin
 os_flavour_type=`hostnamectl | grep "Operating System" | awk '{print $3}'`
 full_os_name=`hostnamectl | grep "Operating System" | awk '{for(i=3;i<=NF;++i) printf("%s ",  $i) }'`
 
+BR='\033[1;31m'     # ${BR}
+BG='\033[1;32m'     # ${BG}
+NC='\033[0m'        # ${NC}
+BY='\033[1;33m'     # ${BY}
+
+check_for_root_user(){
+    if [[ $EUID -ne 0 ]]; then
+        echo -e "${BG}\n Script must be run as root or sudo${NC}" 1>&2
+        exit 1
+    fi
+}
+check_for_root_user
+
 case $os_flavour_type in
    "Ubuntu")
 		echo "1) Detected OS type : $full_os_name"
@@ -31,14 +44,15 @@ case $os_flavour_type in
      ;;
 esac
 
+echo "You are going to create user ${username},You can also change public key "
 useradd ${username} && usermod -aG ${user_group} ${username} && echo "2) User created and added as sudo user"
 
 erroCode=$?
 
-if [ $erroCode != 0 ]
+if [[ $erroCode != 0 ]]
 then
 
-   echo "2) Error while creating user,Exiting"
+   echo -e "2) ${BG}Error while creating user,Exiting${NC}"
    exit 1
 
 else
@@ -46,7 +60,7 @@ else
 grep "+ : ${username} : ALL" /etc/security/access.conf 
 erroCode1=$?
 
-if [ $erroCode1 != 0 ]
+if [[ $erroCode1 != 0 ]]
 then
    echo "+ : ${username} : ALL" >> /etc/security/access.conf && echo "3) witten acces.conf"
 fi
@@ -54,7 +68,7 @@ fi
 grep "auth   \[default=1 ignore=ignore success=ok\] pam_localuser.so" /etc/pam.d/sshd
 erroCode2=$?
 
-if [ $erroCode2 != 0 ]
+if [[ $erroCode2 != 0 ]]
 then
    echo "auth   [default=1 ignore=ignore success=ok] pam_localuser.so" >> /etc/pam.d/sshd && echo "4) Added parameter in sshd"
 fi
@@ -62,7 +76,7 @@ fi
 grep "${username} ALL=(ALL) NOPASSWD:ALL" /etc/sudoers
 erroCode3=$?
 
-if [ $erroCode3 != 0 ]
+if [[ $erroCode3 != 0 ]]
 then
    echo "${username} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && echo "5) Added passwordless sudo user swithch"
 fi
