@@ -1,0 +1,55 @@
+# join - to join table in file 
+
+# csplit - split text file by spcifying regular expression
+
+# timeout - to set timeout for script or cromjob 
+
+# paste - terminal operation as paste
+
+# comm - to print comman word in two file -https://www.youtube.com/shorts/x47s05sVNr8
+
+# tr - to replace or delete character or to sques repeated character
+
+# [ 
+
+# nice - assign priority to command to execute faster
+
+# stty - it can modify terminal attribute and behaviour ex. #stty -a,stty -echo - to remove termnal echo ,to revert #stty echo
+
+# hostid - to print unique hostid ,it is unique among all linux
+
+# factor - to findout factor of number 
+
+# nohup - to run job forever
+
+# nl - to set number to line ex. # nl file.txt ,can be formaated in amy way
+
+# vdir - it is same as "ls"
+
+# tee - to sent output to multiple places ,# script.sh | tee output.log : here it will print log on terminal as well as print to file ouput.log use "-a" to append log file
+
+# stat - to print file info
+
+# test - to test instant value like file exist or not # test -f file.txt ,test 123 -gt 124,teat -d dir_name
+
+# sync - run if cp operaton fails ,will fix file
+
+# rmdir - to remove empty directory
+
+# shred - delte file and overwrite with random data
+
+# dir - same as "ls"
+
+# shuf - to arrange line in random way of file # shuf file.txt
+
+# who - to see who logged in
+
+# xxd - to cover file content in HEX value
+
+# realpath - return full path of a file
+
+# dd - to take backup image of disk or write file with dummy data
+
+# yes - to print yes if application ask for "yes"
+
+# netcat - to send file remotely by listening and sendig file by netcat
