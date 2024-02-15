@@ -53,3 +53,7 @@
 # yes - to print yes if application ask for "yes"
 
 # netcat - to send file remotely by listening and sendig file by netcat
+
+# pinky - to print user informatiom ex: pink -l ec2-user
+
+# script - Record all typed command in terminal
