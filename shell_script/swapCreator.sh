@@ -6,6 +6,8 @@ BR='\033[1;31m'     # ${BR}
 BG='\033[1;32m'     # ${BG}
 NC='\033[0m'        # ${NC}
 BY='\033[1;33m'     # ${BY}
+mark100='\U01F4AF'
+wrong='\u274c\n'
 
 swap_create(){
     echo -e " ${BR}From this point ,action cannot be reverted${NC} "
