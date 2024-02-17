@@ -16,4 +16,6 @@ showU8_256() {
     done
 }
 
-showU8_256 if(3,4)
+showU8_256 1f{3,4}
+
+tput sgr0 # remove color
