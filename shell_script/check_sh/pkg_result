@@ -19,7 +19,6 @@
 [1;33mparted[1;32m is_installed.[0m
 [1;33mutil-linux[1;32m is_installed.[0m
 [1;33miputils-ping[1;31m not_installed.[0m
-[1;33mkbd[1;32m is_installed.[0m
 [1;33me2fsprogs[1;32m is_installed.[0m
 [1;33mfdisk[1;31m not_installed.[0m
 [1;33mgzip[1;32m is_installed.[0m
@@ -28,9 +27,6 @@
 [1;33mnet-tools[1;32m is_installed.[0m
 [1;33misolinux[1;31m not_installed.[0m
 [1;33msyslinux[1;31m not_installed.[0m
-[1;33msyslinux-common[1;31m not_installed.[0m
 [1;33mtar[1;32m is_installed.[0m
 [1;33mlibxml2-devel[1;31m not_installed.[0m
-[1;33msysvinit-tools[1;32m is_installed.[0m
 [1;33mbrutils-2.5[1;31m not_installed.[0m
-[1;33mlzop[1;31m not_installed.[0m

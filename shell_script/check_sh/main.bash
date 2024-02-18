@@ -7,6 +7,7 @@ initializer () {
     > count.txt
     count=0
     num_ip=0
+    tput sgr0
 }
 initializer
 
@@ -21,16 +22,19 @@ send_file (){
 }
 
 show_report (){
-    echo " curerent  ================================== Executed show report ======================================"
+    echo "================================== Executed show report Function ======================================"
     count=`wc -l count.txt | awk '{print$1}'`  
     while [ ${count} != ${num_ip} ];
     do
-        clear
         count=`wc -l count.txt | awk '{print$1}'`
-        echo -e "Total number of server ${num_ip}\n"
-        echo -e "Recived ${count} of ${num_ip} sever report\n" 
+        progressbar ${count} ${num_ip}
     done
+    echo -e "\n Showing Report\n"
+    echo -e "${BG} Suscessfully Fetched Server Report for Unavailable packages\n${NC}"
     cat final.txt
+    echo -e "\n Failed to pull report for below servers because of network issue\n"
+    cat failed_server.txt
+    tput sgr0
 }
 
 echo -e "#############################\n"
@@ -49,7 +53,8 @@ pack_check() {
         echo "executed" >> count.txt
     else
         echo "executed" >> count.txt
-        echo -e "${BR} Connection error for ${1} ${cross}${BY} ,moving to next server ${NC}\n"
+        echo -e "${BR} Connection error for ${1} ${cross}${BY} moving to next server ${NC}\n"
+        echo -e ${1} >> failed_server.txt
     fi
 }
 

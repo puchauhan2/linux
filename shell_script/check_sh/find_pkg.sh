@@ -1,7 +1,8 @@
 
 #!/usr/bin/env bash
 
-packages=("wow" "lsof" "sysstat" "virt-what" "dmidecode" "bc" "attr" "binutils" "cifs-utils" "dhclient" "dosfstools" "ethtool" "gawk" "lsb-release" "xorriso" "grub2-pc" "nfs-common" "openssl" "parted" "util-linux" "iputils-ping" "kbd" "e2fsprogs" "fdisk" "gzip" "iproute2" "lsb-release" "net-tools" "isolinux" "syslinux" "syslinux-common" "tar" "libxml2-devel" "sysvinit-tools" "brutils-2.5" "lzop")
+#packages=("wow" "lsof" "sysstat" "virt-what" "dmidecode" "bc" "attr" "binutils" "cifs-utils" "dhclient" "dosfstools" "ethtool" "gawk" "lsb-release" "xorriso" "grub2-pc" "nfs-common" "openssl" "parted" "util-linux" "iputils-ping" "kbd" "e2fsprogs" "fdisk" "gzip" "iproute2" "lsb-release" "net-tools" "isolinux" "syslinux" "syslinux-common" "tar" "libxml2-devel" "sysvinit-tools" "brutils-2.5" "lzop")
+packages=("wow" "lsof" "sysstat" "virt-what" "dmidecode" "bc" "attr" "binutils" "cifs-utils" "dhclient" "dosfstools" "ethtool" "gawk" "lsb-release" "xorriso" "grub2-pc" "nfs-common" "openssl" "parted" "util-linux" "iputils-ping" "e2fsprogs" "fdisk" "gzip" "iproute2" "lsb-release" "net-tools" "isolinux" "syslinux" "tar" "libxml2-devel" "brutils-2.5" )
 
 BR='\033[1;31m'     # ${BR}
 BG='\033[1;32m'     # ${BG}

@@ -76,3 +76,22 @@ _check
                 echo -e  "${BY}${pkg}${BG} is installed.${NC}"
             fi
     done
+
+
+
+show_report (){
+    echo " curerent  === ${count}"
+    while [ ${count} > 0 ];
+    do
+        if [[ ${num_ip} > ${count} ]]
+        then
+            found_result=$((${num_ip}-${count}))
+            echo -e "Result Found for ${found_result} out of ${num_ip}"
+        else
+            #cat final.txt
+             echo " curerent  === ${count}"
+        fi
+
+    done
+    echo ${count}
+}
