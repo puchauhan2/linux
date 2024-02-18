@@ -12,13 +12,13 @@ initializer () {
 initializer
 
 executer (){
-    ssh ${bypass} -i ${key} ec2-user@${1} ${2}
+    timeout 60s ssh ${bypass} -i ${key} ec2-user@${1} ${2}
 }
 
 send_file (){
 
     echo -e "${BY} Sending package check script to ${1} ${NC} \n"
-    scp ${bypass} -i ${key} find_pkg.sh ec2-user@${1}:~
+    timeout 60s scp ${bypass} -i ${key} find_pkg.sh ec2-user@${1}:~
 }
 
 show_report (){
@@ -30,9 +30,9 @@ show_report (){
         progressbar ${count} ${num_ip}
     done
     echo -e "\n Showing Report\n"
-    echo -e "${BG} Suscessfully Fetched Server Report for Unavailable packages\n${NC}"
+    echo -e "${BG} Suscessfully Fetched Server Report for Unavailable packages ${mark100}${NC}\n"
     cat final.txt
-    echo -e "\n Failed to pull report for below servers because of network issue\n"
+    echo -e "\n${BR} Failed to pull report for below servers because of network issue${cross}${NC}\n"
     cat failed_server.txt
     tput sgr0
 }
@@ -63,10 +63,9 @@ server_ip(){
 
     initializer
     for ip in `cat server_list`; do
-        pack_check ${ip} &
+        pack_check ${ip}
         let num_ip++
     done
-    echo -e "Executed Parellel Operation\n"
     show_report
 }
 
