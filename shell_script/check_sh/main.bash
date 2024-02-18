@@ -25,11 +25,10 @@ show_report (){
     count=`wc -l count.txt | awk '{print$1}'`  
     while [ ${count} != ${num_ip} ];
     do
-
+        clear
         count=`wc -l count.txt | awk '{print$1}'`
         echo -e "Total number of server ${num_ip}\n"
         echo -e "Recived ${count} of ${num_ip} sever report\n" 
-        sleep 1
     done
     cat final.txt
 }
