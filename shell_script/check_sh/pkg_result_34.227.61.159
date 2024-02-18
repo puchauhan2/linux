@@ -1,5 +1,5 @@
 wow not_installed.
-lsof not_installed.
+lsof is_installed.
 sysstat not_installed.
 virt-what is_installed.
 dmidecode is_installed.

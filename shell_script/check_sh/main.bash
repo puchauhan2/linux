@@ -42,14 +42,15 @@ echo -e "#############################\n"
 pack_check() {
 
     echo -e "${BY} Checking package for ${1}${NC}"
-    send_file ${1} && executer ${1} "sudo bash find_pkg.sh" > pkg_result
+    log_path=${PWD}/log/pkg_result_${1}
+    send_file ${1} && executer ${1} "sudo bash find_pkg.sh" > ${log_path}
     errorCode1=${?}
 
     if [[ ${errorCode1} = 0 ]]
     then
-        is_installed=`cat pkg_result | grep --fixed-strings "is_installed" | awk '{print $1}'`
-        not_installed=`cat pkg_result | grep --fixed-strings "not_installed" | awk '{print $1}'`
-        echo $ip ${not_installed} >> final.txt
+        is_installed=`cat ${log_path} | grep --fixed-strings "is_installed" | awk '{print $1}'`
+        not_installed=`cat ${log_path} | grep --fixed-strings "not_installed" | awk '{print $1}'`
+        echo ${1} ${not_installed} >> final.txt
         echo "executed" >> count.txt
     else
         echo "executed" >> count.txt
