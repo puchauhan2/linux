@@ -5,6 +5,7 @@ initializer () {
     > final.txt
     > failed_server.txt
     > count.txt
+    mkdir -p log
     count=0
     num_ip=0
     tput sgr0
@@ -32,7 +33,7 @@ show_report (){
     echo -e "\n Showing Report\n"
     echo -e "${BG} Suscessfully Fetched Server Report for Unavailable packages ${mark100}${NC}\n"
     cat final.txt
-    echo -e "\n${BR} Failed to pull report for below servers because of network issue${cross}${NC}\n"
+    echo -e "\n${BR} Failed to pull report for below servers because of network issue ${cross}${NC}\n"
     cat failed_server.txt
     tput sgr0
 }
@@ -63,7 +64,7 @@ server_ip(){
 
     initializer
     for ip in `cat server_list`; do
-        pack_check ${ip}
+        pack_check ${ip} &
         let num_ip++
     done
     show_report
