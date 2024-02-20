@@ -1,3 +1,4 @@
+#!/bin/bash
 source ./var.bash
 
 initializer () {
@@ -9,6 +10,7 @@ initializer () {
     count=0
     num_ip=0
     tput sgr0
+    cat check_pkg_s_line.bash | base64 -w 0 >encoded_code.sh
 }
 initializer
 
@@ -31,20 +33,21 @@ show_report (){
         progressbar ${count} ${num_ip}
     done
     echo -e "\n Showing Report\n"
-    echo -e "${BG} Suscessfully Fetched Server Report for Unavailable packages ${mark100}${NC}\n"
+    echo -e "${BG} Suscessfully Fetched Unavailable Package Details for Below server.You can also check file final.txt ${mark100}${NC}\n"
     cat final.txt
-    echo -e "\n${BR} Failed to pull report for below servers because of network issue ${cross}${NC}\n"
+    echo -e "\n${BR} Failed to pull Package Details for below servers because of network or login issue,please check log dir for more info ${cross}${NC}\n"
     cat failed_server.txt
     tput sgr0
 }
 
 echo -e "#############################\n"
 
-pack_check() {
+pack_check() { # Where are you going ,look at here
 
     echo -e "${BY} Checking package for ${1}${NC}"
     log_path=${PWD}/log/pkg_result_${1}
-    send_file ${1} && executer ${1} "sudo bash find_pkg.sh" > ${log_path}
+    #send_file ${1} && executer ${1} "sudo bash find_pkg.sh" > ${log_path} # enable file base execution
+    executer ${1} "echo "${2}" | base64 -d > check.sh && sudo bash check.sh" > ${log_path}
     errorCode1=${?}
 
     if [[ ${errorCode1} = 0 ]]
@@ -63,8 +66,9 @@ pack_check() {
 server_ip(){
 
     initializer
+    line_command=`cat encoded_code.sh`
     for ip in `cat server_list`; do
-        pack_check ${ip} &
+        pack_check ${ip} ${line_command} & # line execution and thread
         let num_ip++
     done
     show_report
