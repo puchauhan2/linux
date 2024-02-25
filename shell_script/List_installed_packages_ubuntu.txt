@@ -4,6 +4,12 @@ packages=("lsof" "sysstat" "virt-what" "dmidecode" "bc" "attr" "binutils" "cifs-
 
 for pkg in ${packages[@]}; do
 
-apt list $pkg 2> /dev/null |grep -i installed
+pkg_info=`apt list $pkg 2> /dev/null |grep -i installed | sed 's/\// /g'  | awk '{print $1}'`
+
+	if [ "${pkg}" == "${pkg_info}" ]; then
+		echo "${pkg} is_installed"
+	else
+		echo "${pkg} not_installed"
+	fi
 
 done

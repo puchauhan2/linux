@@ -22,3 +22,5 @@ do
 done
 
 
+# cat pkg_install  | sed 's/\// /g'  | awk '{print $1}'
+
