@@ -3,10 +3,12 @@ source ./var.bash
 
 function initializer () {
 
+    clear
     > final.txt
     > failed_server.txt
     > is_installed_server.text
     > count.txt
+    > install_pkg
     mkdir -p log
     count=0
     num_ip=0
@@ -16,13 +18,13 @@ function initializer () {
 initializer
 
 function executer (){
-    timeout 60s ssh ${bypass} -i ${key} ec2-user@${1} ${2}
+    timeout 25s ssh ${bypass} -i ${key} ec2-user@${1} ${2}
 }
 
 function send_file (){
 
     echo -e "${BY} Sending package check script to ${1} ${NC} \n"
-    timeout 60s scp ${bypass} -i ${key} find_pkg.sh ec2-user@${1}:~
+    timeout 25s scp ${bypass} -i ${key} find_pkg.sh ec2-user@${1}:~
 }
 
 function show_report (){
@@ -59,6 +61,7 @@ function pack_check() { # Where are you going ,look at here
         is_installed=`awk '/is_installed/ {print $1}' ${log_path}`
         not_installed=`awk '/not_installed/ {print $1}' ${log_path}`
         echo ${1} ${not_installed} >> final.txt
+        echo ${not_installed} >> install_pkg
         echo ${1} ${is_installed} >> is_installed_server.text
         echo "executed" >> count.txt
     else
@@ -66,6 +69,17 @@ function pack_check() { # Where are you going ,look at here
         echo -e "${BR} Connection or Something error for ${1} ${cross}${BY} moving to next server ${NC}\n"
         echo -e ${1} >> failed_server.txt
     fi
+}
+
+function pack_install(){
+    install_server_list=`awk '{print $1}' final.txt`
+    array_install_server_list=(${install_server_list})
+    num_server=${#array_install_server_list[@]}
+    for server_ip in seq ${num_server};do
+    echo ${array_install_server_list[${server_ip}]}
+    done
+
+
 }
 
 function server_ip(){
