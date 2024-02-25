@@ -18,3 +18,7 @@ function progressbar {
     _empty=$(printf "%${_left}s")
 printf "\rProgress : [${_fill// /#}${_empty// /-}] ${_progress}%%"
 }
+
+show_report(){
+    ls /
+}

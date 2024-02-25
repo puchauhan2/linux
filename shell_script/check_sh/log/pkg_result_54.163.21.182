@@ -1,0 +1,14 @@
+wow not_installed.
+lsof not_installed.
+sysstat not_installed.
+virt-what is_installed.
+dmidecode is_installed.
+bc is_installed.
+attr not_installed.
+e2fsprogs is_installed.
+fdisk not_installed.
+gzip is_installed.
+iproute2 not_installed.
+tar is_installed.
+libxml2-devel not_installed.
+brutils-2.5 not_installed.
