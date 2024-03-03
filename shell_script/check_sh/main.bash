@@ -78,8 +78,6 @@ function pack_install(){
     for server_ip in seq ${num_server};do
     echo ${array_install_server_list[${server_ip}]}
     done
-
-
 }
 
 function server_ip(){
