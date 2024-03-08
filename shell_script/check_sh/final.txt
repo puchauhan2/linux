@@ -1,2 +1,0 @@
-52.91.170.249 wow sysstat attr fdisk iproute2 libxml2-devel brutils-2.5
-54.221.86.94 wow lsof sysstat attr fdisk iproute2 libxml2-devel brutils-2.5
