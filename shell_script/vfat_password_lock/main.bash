@@ -3,7 +3,6 @@ source ./var.bash
 
 function initializer () {
 
-    clear
     > final.txt
     > failed_server.txt
     > is_installed_server.text
@@ -12,12 +11,11 @@ function initializer () {
     count=0
     num_ip=0
     tput sgr0
-    cat check_vfat.bash | base64 -w 0 >encoded_code.sh
 }
 initializer
 
 function executer (){
-    timeout 25s ssh ${bypass} -i ${key} ec2-user@${1} ${2}
+    timeout 60s ssh ${orgument} -i ${key} ec2-user@${1} 'sudo -n bash -s' < check_vfat.bash;
 }
 
 
@@ -41,7 +39,7 @@ function show_report (){
 
 echo -e "#############################\n"
 
-function pack_check() { # Where are you going ,look at here
+function vfat_check() { # Where are you going ,look at here
 
     echo -e "${BY} Checking package for ${1}${NC}"
     log_path=${PWD}/log/pkg_result_${1}
@@ -65,7 +63,6 @@ function pack_check() { # Where are you going ,look at here
 function server_ip(){
 
     initializer
-    line_command=`cat encoded_code.sh`
     list_server=`cat server_list.txt`
     if [[ -z ${list_server} ]]
         then
@@ -73,9 +70,11 @@ function server_ip(){
             exit 1
         else
             for ip in ${list_server}; do
-            pack_check ${ip} ${line_command} & # line execution and thread
+            vfat_check ${ip} & # line execution and thread
             let num_ip++
             done
             show_report
         fi
 }
+
+server_ip

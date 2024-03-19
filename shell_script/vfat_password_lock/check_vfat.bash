@@ -1,4 +1,6 @@
-os_flavour_type=`hostnamectl | grep "Operating System" | awk '{print $3}'`;
+packages=("wow" "lsof" "sysstat" "virt-what" "dmidecode" "bc" "attr" "binutils" "cifs-utils" "dhclient" "dosfstools" "ethtool" "gawk" "lsb-release" "xorriso" "grub2-pc" "nfs-common" "openssl" "parted" "util-linux" "iputils-ping" "kbd" "e2fsprogs" "fdisk" "gzip" "iproute2" "lsb-release" "net-tools" "isolinux" "syslinux" "syslinux-common" "tar" "libxml2-devel" "sysvinit-tools" "brutils-2.5" "lzop")
+
+source /etc/os-release
 
 oracle_pkg() {
     for pkg in ${packages[@]};
@@ -22,8 +24,8 @@ for pkg in ${packages[@]}; do
 done
 
 }
-case $os_flavour_type in 
-"Ubuntu") echo "Ubuntu linux not supported as of now" ;; 
+case ${ID} in 
+"debain") echo "Ubuntu linux not supported as of now" ;; 
 "CentOS") oracle_pkg ;; 
 "SUSE") echo "SUSE linux not supported" ;; 
 "Red") oracle_pkg ;; 

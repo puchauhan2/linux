@@ -1,7 +1,7 @@
 name="puneet"
 key=./key.pem
 port=22
-bypass='-o StrictHostKeyChecking=no'
+orgument='-q -o BatchMode=yes -o StrictHostKeyChecking=no'
 
 BR='\033[1;31m'     # ${BR}
 BG='\033[1;32m'     # ${BG}
@@ -19,6 +19,3 @@ function progressbar {
 printf "\rProgress : [${_fill// /#}${_empty// /-}] ${_progress}%%"
 }
 
-show_report(){
-    ls /
-}
