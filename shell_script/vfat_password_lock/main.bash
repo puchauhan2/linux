@@ -15,7 +15,6 @@ ssh_user='ec2-user' # change user here
 key=./key.pem       # Change pem key here
 port=22             # Optional
 orgument='-q -o BatchMode=yes -o StrictHostKeyChecking=no'
-ldd=`printf "%105s"`
 
 BR='\033[1;31m'     # ${BR}
 BG='\033[1;32m'     # ${BG}
@@ -23,6 +22,8 @@ NC='\033[0m'        # ${NC}
 BY='\033[1;33m'     # ${BY}
 mark100='\U01F4AF'
 cross='\u274c'
+ldd=`printf "%105s"`
+lde=`printf "%40s"`
 
 function progressbar {
     let _progress=(${1}*100/${2}*100)/100
@@ -38,7 +39,7 @@ function executer (){
 }
 
 function show_report (){
-    echo -e "\n================================== Showing Logs ======================================\n"
+    printf "\n${lde// /=} Showing Logs ${lde// /=}\n"
     count=`awk 'END { print NR }' count.txt`  
     while [ ${count} != ${num_ip} ];
     do
@@ -52,10 +53,10 @@ function show_report (){
         echo -e ""
     else
         echo -e "\n Showing Report\n"
-        echo -e "\n${BG}Successfully Fetched Output for below server ${mark100}${NC}"
-        printf "${ldd// /-}"
+        echo -e "\n${BG} Successfully Fetched Output for below server ${mark100}${NC}"
+        printf " ${ldd// /-} \n"
         awk '{print NR " -",$0}' final.txt
-        printf "${ldd// /-}"
+        printf " ${ldd// /-}\n "
     fi
 
     failed_server=`cat failed_server.txt`
@@ -63,12 +64,12 @@ function show_report (){
     then
         echo -e ""
     else
-        echo -e "\n${BR}Unable to pull Output for below server ${cross}${NC}"
-        printf "${ldd// /-}"
+        echo -e "\n${BR} Unable to pull Output for below server ${cross}${NC}"
+        printf " ${ldd// /-} \n"
         awk '{print NR " -",$0}' failed_server.txt
-        printf "${ldd// /-}"
+        printf " ${ldd// /-} \n"
     fi
-    echo -e "\n${BY}You can also check "log" dir for individual server log ${NC}"
+    echo -e "\n${BY} You can also check "log" dir for perticular server log ${NC}"
     tput sgr0
 }
 

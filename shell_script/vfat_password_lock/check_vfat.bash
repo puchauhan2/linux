@@ -28,7 +28,7 @@ function enable_vfat(){
     grep '#install vfat /bin/true' /etc/modprobe.d/dev-sec.conf
     errorCode6=${?}
 
-    if [[ ${errorCode5} = 0 ]] && [[ ${errorCode6} = 0 ]]
+    if [[ ${errorCode5} = 0 ]] || [[ ${errorCode6} = 0 ]]
     then 
     modprobe -v vfat && echo -e "${BY}OutPut :${BG} UnModified Config: Enabled Vfat ${m100}${NC}"
     else 
@@ -46,7 +46,7 @@ function check_vfat_cfg(){
     grep 'install vfat /bin/true' /etc/modprobe.d/dev-sec.conf
     errorCode4=${?}
 
-    if [[ ${errorCode3} = 0 ]] && [[ ${errorCode4} = 0 ]]
+    if [[ ${errorCode3} = 0 ]] || [[ ${errorCode4} = 0 ]]
     then 
     echo -e "${BG} Vfat configuration file found,going to enable Vfat ${m100}${NC}"
     enable_vfat
