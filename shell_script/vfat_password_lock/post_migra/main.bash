@@ -14,36 +14,29 @@ C='\033[0m'        # ${NC}
 Y='\033[1;33m'     # ${BY}
 m100='\U01F4AF'
 cross='\u274c'
-ssh_user='gecloud'
+ssh_user='ec2-user'
 key=./key.pem 
-postmigration_script='modules/post_migrationscript.bash'
-postmigration_firstrun="modules/post_migrationscript.bash firstrun"
 
 function send_file(){
-    log_path=${PWD}/log/${1}_scp_log.txt
-    scp -i ${key} ${bypass} ${pack} ${ssh_user}@$1:/home/gecloud/ > ${log_path}
+    scp -v -i ${key} ${bypass} ${pack} ${ssh_user}@$1:/home/${ssh_user}/ 
 }
 
 function executer(){
-    log_path=${PWD}/log/${1}_exe_log.txt
-    ssh ${orgument} -i ${key} ${ssh_user}@${1} 'sudo -n bash -s' < modules/post_migrationscript.bash firstrun;
+    ssh ${orgument} -i ${key} ${ssh_user}@${1} 'sudo -n bash -s' < modules/post_migrationscript.bash firstrun ;
 }
 
 function executer_post_normal(){
-    log_path=${PWD}/log/${1}_exe_log.txt
-    ssh ${orgument} -i ${key} ${ssh_user}@${1} 'sudo -n bash -s' < modules/post_migrationscript.bash;
+    ssh ${orgument} -i ${key} ${ssh_user}@${1} 'sudo -n bash -s' < modules/post_migrationscript.bash 
 }
 
 function delete_pkg(){
-    log_path=${PWD}/log/${1}_delete_log.txt
-    ssh ${orgument} -i ${key} ${ssh_user}@${1} 'bash -s' < modules/deletepkg.bash;
+    ssh ${orgument} -i ${key} ${ssh_user}@${1} 'bash -s' < modules/deletepkg.bash ;
 }
 
 
 function scp_xfer() { 
 
     echo -e "${Y} Sending File ${1}${C}"
-    log_path=${PWD}/log/${1}_scp_log.txt
     send_file ${1} 
     errorCode1=${?}
 
@@ -61,8 +54,6 @@ function scp_xfer() {
 function command_exec() { 
 
     echo -e "${Y} Executing Command on ${1}${C}"
-    log_path=${PWD}/log/${1}_exec_log.txt
- 
     executer ${1}  
     errorCode2=${?}
 
@@ -80,8 +71,6 @@ function command_exec() {
 function post_log_function() { 
 
     echo -e "${Y} Executing Command on ${1}${C}"
-    log_path=${PWD}/log/${1}_post_log_log.txt
- 
     executer_post_normal ${1}  
     errorCode3=${?}
 
@@ -99,8 +88,6 @@ function post_log_function() {
 function delete_pkg_comm() {
 
     echo -e "${Y} Executing delete on ${1}${C}"
-    log_path=${PWD}/log/${1}_exec_log.txt
- 
     delete_pkg ${1}  
     errorCode4=${?}
 
@@ -120,12 +107,14 @@ function execute_command(){
     list_server=`cat server.txt`
     if [[ -z ${list_server} ]]
     then
-        echo -e "${R} Server list is empty ${cross}\n${Y} please fill server_list${C}"
+        echo -e "${R} Server list is empty ${cross}\n${Y} please fill server list${C}"
         exit 1
     else
         for ip in ${list_server}; do
             echo $ip
-            command_exec ${ip} &
+            log_path=${PWD}/log/${ip}_exec_postmigration_firstrun_log.txt
+            echo -e "\n\n######################### `date` #########################\n" >> "${log_path}"
+            command_exec ${ip} 2>&1| tee -a "${log_path}" &
             let num_ip++
         done
     fi
@@ -138,12 +127,14 @@ function send_postmgr_file(){
     list_server=`cat server.txt`
     if [[ -z ${list_server} ]]
     then
-        echo -e "${R} Server list is empty ${cross}\n${Y} please fill server_list${C}"
+        echo -e "${R} Server list is empty ${cross}\n${Y} please fill server list${C}"
         exit 1
     else
         for ip in ${list_server}; do
             echo $ip
-            scp_xfer ${ip} &
+            log_path=${PWD}/log/${ip}_scp_log.txt
+            echo -e "\n\n######################### `date` #########################\n" >> "${log_path}"
+            scp_xfer ${ip} 2>&1| tee -a "${log_path}" &
             let num_ip++
         done
     fi
@@ -156,12 +147,14 @@ function delete_pkg_server(){
     list_server=`cat server.txt`
     if [[ -z ${list_server} ]]
     then
-        echo -e "${R} Server list is empty ${cross}\n${Y} please fill server_list${C}"
+        echo -e "${R} Server list is empty ${cross}\n${Y} please fill server list${C}"
         exit 1
     else
         for ip in ${list_server}; do
             echo $ip
-            delete_pkg_comm ${ip} &
+            log_path=${PWD}/log/${ip}_delete_pkg_log.txt
+            echo -e "\n\n######################### `date` #########################\n" >> "${log_path}"
+            delete_pkg_comm ${ip} 2>&1| tee -a "${log_path}" &
             let num_ip++
         done
     fi
@@ -174,12 +167,14 @@ function postmigration_normal(){
     list_server=`cat server.txt`
     if [[ -z ${list_server} ]]
     then
-        echo -e "${R} Server list is empty ${cross}\n${Y} please fill server_list${C}"
+        echo -e "${R} Server list is empty ${cross}\n${Y} please fill server list${C}"
         exit 1
     else
         for ip in ${list_server}; do
             echo $ip
-            post_log_function ${ip} &
+            log_path=${PWD}/log/${ip}_postmigration_normal_log.txt
+            echo -e "\n\n######################### `date` #########################\n" >> "${log_path}"
+            post_log_function ${ip} 2>&1| tee -a "${log_path}" &
             let num_ip++
         done
     fi
@@ -190,7 +185,6 @@ function postmigration_normal(){
 function one_shot_scp_xfer() { 
 
     echo -e "${Y} Sending File ${1}${C}"
-    log_path=${PWD}/log/${1}_scp_log.txt
     server_ip_addr=${1}
     send_file ${1} 
     errorCode5=${?}
@@ -214,12 +208,14 @@ function one_shot(){
     list_server=`cat server.txt`
     if [[ -z ${list_server} ]]
     then
-        echo -e "${R} Server list is empty ${cross}\n${Y} please fill server_list${C}"
+        echo -e "${R} Server list is empty ${cross}\n${Y} please fill server Slist${C}"
         exit 1
     else
         for ip in ${list_server}; do
             echo $ip
-            one_shot_scp_xfer ${ip} &
+            log_path=${PWD}/log/${ip}_one_shot_log.txt
+            echo -e "\n\n######################### `date` #########################\n" >> "${log_path}"
+            one_shot_scp_xfer ${ip} 2>&1| tee -a "${log_path}" &
             let num_ip++
         done
     fi
