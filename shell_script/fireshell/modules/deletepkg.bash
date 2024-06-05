@@ -1,0 +1,1 @@
+rm -rf MicrosoftDefenderATPOnboardingLinuxServer.py  QualysCloudAgentx64.rpm cribl-4.tgz  post_migrationscript.bash
