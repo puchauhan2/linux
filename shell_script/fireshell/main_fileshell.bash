@@ -17,10 +17,10 @@ key=./key.pem
 echo -e "Please confirm mode of execution,type ${Y}Yes${C} for parallel server execution OR ${Y}No${C} for single sever execution\n"
 read mode
 case ${mode} in
-   "yes" | "Yes")
+   "yes"|"Yes")
 		echo -e "${Y} You have selected parallel server execution ${C}\n"
       ;;
-   "No" | "no")
+   "No"|"no")
 		echo -e "${Y} single sever execution ${C}\n"
       ;;
    *)
@@ -28,13 +28,18 @@ case ${mode} in
 		exit 1
      ;;
 esac
-
+############### executers ####################
 function system_info_executer(){
    ssh ${orgument} -i ${key} ${ssh_user}@${1} 'sudo -n bash -s' < modules/system_info.bash ;
 }
 
+function run_your_script_executer (){
+   ssh ${orgument} -i ${key} ${ssh_user}@${1} 'sudo -n bash -s' < modules/run_your_script.bash ;
+}
+
+#################### logger ##################
+
 function system_info_exec(){
-   system_info_executer ${1}
 
    echo -e "${Y} Executing Command on ${1}${C}"
    system_info_executer ${1}
@@ -51,6 +56,23 @@ function system_info_exec(){
     echo "executed" >> log/count.txt
 }
 
+function run_your_script_exec(){
+   
+   echo -e "${Y} Executing Command on ${1}${C}"
+   run_your_script_executer ${1}
+   errorCodeSystem_info=${?}
+
+   if [[ ${errorCodeSystem_info} = 0 ]]
+   then
+      echo -e "${G} Command executed successfully on ${1}${C}"
+      echo -e ${1} >> log/success_server.txt
+   else
+      echo -e "${R} Connection or Some error occured for ${1} ${cross}${Y} moving to next server ${C}\n"
+      echo -e ${1} >> log/failed_server.txt
+    fi
+    echo "executed" >> log/count.txt
+}
+############### job parser #################
 function system_info(){
     initializer
     list_server=`cat server.txt`
@@ -77,13 +99,36 @@ function system_info(){
     show_report
 }
 
+function run_your_script(){
+       initializer
+    list_server=`cat server.txt`
+    if [[ -z ${list_server} ]]
+    then
+        echo -e "${R} Server list is empty ${cross}\n${Y} please fill server list${C}"
+        exit 1
+    else
+        for ip in ${list_server}; do
+            echo $ip
+            log_path=${PWD}/log/${ip}_run_your_script_log.txt
+            echo -e "\n\n######################### `date` #########################\n" >> "${log_path}"
+            
+            if [[ ${mode} == "yes" ]] || [[ ${mode} == "Yes" ]]
+            then
+               run_your_script_exec ${ip} 2>&1| tee -a "${log_path}" &
+            else
+               run_your_script_exec ${ip} 2>&1| tee -a "${log_path}"
+            fi
+            let num_ip++
+        done
+    fi
+    sleep 0.01
+    show_report
+}
+################ Menu ################
 function menu (){
 echo -e "${G} ########## Printing Menu ######### ${C}\n"
 echo -e "${Y} Press 1 get System Info ${C}\n"
-echo -e "${Y} Press 2 to Send package to servers ${C}\n"
-echo -e "${Y} Press 3 to Execute Postmigration first time on server ${C}\n"
-echo -e "${Y} Press 4 to Execute Postmigration normally on server ${C}\n"
-echo -e "${Y} Press 5 to Delete Migration package  ${C}\n"
+echo -e "${Y} Press 2 to run your script ${C}\n"
 read -p "Please enter your choice OR Press CTRL + c to Exit " choice
 
 case ${choice} in
@@ -92,20 +137,8 @@ case ${choice} in
 		system_info
       ;;
    "2")
-		echo -e "${Y} Executing Postmigration firstrun ${C}\n"
-        execute_command
-      ;;
-   "3")
-		echo -e "${Y} Executing Postmigration normally ${C}\n"
-         postmigration_normal
-      ;;
-   "4")
-		echo -e "${Y} Deleting Migration Package ${C}\n"
-        delete_pkg_server
-      ;;
-   "5")
-		echo -e "${Y} Executing One Shot Postmigration ${C}";
-		one_shot
+		echo -e "${Y} Run Your Script ${C}\n"
+        run_your_script
       ;;
    *)
 		echo -e "${R} This choice is under Development ${C}";
