@@ -1,3 +1,1 @@
-df -h
-ls /
-
+cat /etc/*release

@@ -2,7 +2,7 @@
 source modules/report.bash
 initializer
 
-orgument='-q -o BatchMode=yes -o StrictHostKeyChecking=no'
+argument='-q -o BatchMode=yes -o StrictHostKeyChecking=no'
 bypass='-o StrictHostKeyChecking=no -O'
 
 R='\033[1;31m'     # ${R}
@@ -28,16 +28,17 @@ case ${mode} in
 		exit 1
      ;;
 esac
+
 ############### executers ####################
 function system_info_executer(){
-   ssh ${orgument} -i ${key} ${ssh_user}@${1} 'sudo -n bash -s' < modules/system_info.bash ;
+   ssh ${argument} -i ${key} ${ssh_user}@${1} 'sudo -n bash -s' < modules/system_info.bash ;
 }
 
-function run_your_script_executer (){
-   ssh ${orgument} -i ${key} ${ssh_user}@${1} 'sudo -n bash -s' < modules/run_your_script.bash ;
+function run_your_script_executer(){
+   ssh ${argument} -i ${key} ${ssh_user}@${1} 'sudo -n bash -s' < modules/run_your_script.bash ;
 }
 
-#################### logger ##################
+#################### execution status check ##################
 
 function system_info_exec(){
 
@@ -72,7 +73,8 @@ function run_your_script_exec(){
     fi
     echo "executed" >> log/count.txt
 }
-############### job parser #################
+
+############### job distributor and logger #################
 function system_info(){
     initializer
     list_server=`cat server.txt`
@@ -124,6 +126,7 @@ function run_your_script(){
     sleep 0.01
     show_report
 }
+
 ################ Menu ################
 function menu (){
 echo -e "${G} ########## Printing Menu ######### ${C}\n"

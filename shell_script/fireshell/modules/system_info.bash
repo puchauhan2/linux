@@ -1,3 +1,6 @@
 df -h
+
 nproc
+
 hostnamectl
+
