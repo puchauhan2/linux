@@ -1,6 +1,1 @@
 df -h
-
-nproc
-
-hostnamectl
-
