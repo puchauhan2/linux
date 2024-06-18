@@ -1,4 +1,4 @@
-packages=("lsof" "sysstat" "virt-what" "dmidecode" "bc" "attr" "e2fsprogs" "fdisk" "gzip" "iproute2" "tar" "libxml2-devel" "brutils-2.5" );
+packages=("lsof" "bc" "sysstat" "dmidecode" "virt-what" "brutils-2.7" );
 os_flavour_type=`hostnamectl | grep "Operating System" | awk '{print $3}'`;
 
 oracle_pkg() {

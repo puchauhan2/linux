@@ -76,8 +76,22 @@ function show_report_pack_check (){
         echo -e "\n Showing Report\n"
         echo -e "\n${G} Found Missing package on below servers ${m100}${C}"
         printf " ${ldd// /-} \n"
-        awk '{print NR " -",$0}' log/not_installed.txt
+        awk -e '{print NR " -\033[1;31m",$0}' log/not_installed.txt ;printf ${C}
         printf " ${ldd// /-}\n "
+
+        echo -e "${C}\n Want to Proceed with Package installation ?\n Enter ${Y}Yes${C} to Proceed Or [CTRL + c]  to Exit${C}"
+        read response
+        case ${response} in
+        "yes"|"Yes"|"Y"|"y")
+		echo -e "${Y}\n You have selected to Proceed with Package installation ${C}\n";
+        time pack_install
+        ;;
+        *)
+		echo -e "${R} Wrong Choice or Nothing selected,quiting ${C}";
+		exit 1
+        ;;
+        esac
+
     fi
 
     failed_server=`cat log/failed_server.txt`
@@ -93,17 +107,4 @@ function show_report_pack_check (){
     echo -e "\n${Y} You can also check "log" dir for perticular server log ${C}"
     tput sgr0
 
-    echo -e "${Y}\n Want to Proceed with Package installation ?\n Enter Yes to Proceed Or [CTRL + c]  to Exit${C}"
-
-    read response
-    case ${response} in
-    "yes"|"Yes"|"Y"|"y")
-		echo -e "${Y}\n You have selected to Proceed with Package installation ${C}\n";
-        time pack_install
-      ;;
-   *)
-		echo -e "${R} Wrong Choice or Nothing selected,quiting ${C}";
-		exit 1
-     ;;
-    esac
 }

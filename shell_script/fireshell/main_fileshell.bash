@@ -221,6 +221,7 @@ function pack_check() {
 
 #### 4
 function pack_install() {
+   echo -e "\n######################### Executed Package Install #########################\n"
    initializer
    list_server=`cat log/success_server_pkg_install.txt`
    if [[ -z ${list_server} ]]
@@ -249,9 +250,9 @@ function pack_install() {
 
 function menu (){
 echo -e "${G} \n########## Printing Menu ######### ${C}\n"
-echo -e "${Y} Press 1 get System Info ${C}\n"
-echo -e "${Y} Press 2 to run your script ${C}\n"
-echo -e "${Y} Press 3 to run Package Check ${C}\n"
+echo -e "${Y} Press 1 Get System Info ${C}\n"
+echo -e "${Y} Press 2 To run your script ${C}\n"
+echo -e "${Y} Press 3 To run Package Check and install ${C}\n"
 read -p "Please enter your choice OR Press CTRL + c to Exit " choice
 
 case ${choice} in
