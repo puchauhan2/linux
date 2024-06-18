@@ -57,6 +57,10 @@ function pack_install_executer(){
    ssh ${argument} -i ${key} -p ${port} ${ssh_user}@${1} 'sudo -n bash -s' < modules/install_pkg.bash "${pack_details}" ;
 }
 
+##### 5
+function scp_install_executer(){
+    scp -i ${key} ${bypass} package/* ${ssh_user}@${1}:/tmp/    
+}
 #################### execution status check ##################
 #### 1
 function system_info_exec(){
@@ -120,11 +124,25 @@ function pack_check_exec(){
 
 #### 4
 function pack_install_exec(){
+
+   echo -e " Sending Packages to ${1}"
+   scp_install_executer ${1}
+   errorPackSend=${?}
+   if [[ ${errorPackSend} = 0 ]]
+   then
+      echo -e "${G} Package copied successfully on ${1}${C}"
+   else
+      echo -e "${R} Package Copy Fail for ${1} ${cross}${Y} moving to next server ${C}\n"
+      echo -e ${1} >> log/failed_server.txt
+      echo "executed" >> log/count.txt
+      exit 1
+    fi
+
    echo -e "${Y} Installing package on ${1}${C}"
    pack_install_executer ${1}
    errorPackInstall=${?}
 
-   if [[ ${errorPackInstall} = 0 ]]
+   if [[ ${errorPackInstall} = 0 ]] && [[ ${errorPackSend} = 0 ]]
    then
       echo -e "${G} Installation successfully on ${1}${C}"
       echo -e ${1} >> log/success_server.txt

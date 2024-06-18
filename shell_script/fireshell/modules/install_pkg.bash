@@ -11,23 +11,23 @@ oracle_pkg() {
     case ${pack} in
         "brutils-2.7")
 		    echo -e "Installing ${pkg}\n"
-		    yum install /tmp/brutils-2.7-1.el8.x86_64.rpm
+		    yum install /tmp/brutils-2.7-1.el8.x86_64.rpm -y
         ;;
         "lsof")
 		    echo -e "Installing ${pkg}\n"
-		    yum install /tmp/brutils-2.7-1.el8.x86_64.rpm
+		    yum install /tmp/lsof-4.87-6.el7.x86_64.rpm -y
         ;;
         "sysstat")
 		    echo -e "Installing ${pkg}\n"
-		    yum install /tmp/brutils-2.7-1.el8.x86_64.rpm
+		    yum install /tmp/sysstat-10.1.5-20.el7_9.x86_64.rpm -y
         ;;
         "dmidecode")
 		    echo -e "Installing ${pkg}\n"
-		    yum install /tmp/brutils-2.7-1.el8.x86_64.rpm
+		    yum install /tmp/dmidecode-3.2-5.el7_9.1.x86_64.rpm -y
         ;;
         "virt-what")
 		    echo -e "Installing ${pkg}\n"
-		    yum install /tmp/brutils-2.7-1.el8.x86_64.rpm
+		    yum install /tmp/virt-what-1.18-4.el7_9.1.x86_64.rpm -y
         ;;
         "bc")
 		    echo -e "Installing ${pkg}\n"
