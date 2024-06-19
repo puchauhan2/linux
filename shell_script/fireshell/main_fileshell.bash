@@ -137,7 +137,7 @@ function pack_install_exec(){
    then
       echo -e "${G} Package copied successfully on ${1}${C}"
    else
-      echo -e "${R} Package Copy Fail for ${1} ${cross}${Y} moving to next server ${C}\n"
+      echo -e "${R} Package Copy Fail on ${1} ${cross}${Y} moving to next server ${C}\n"
       echo -e ${1} >> log/failed_server.txt
       echo "executed" >> log/count.txt
       exit 1
