@@ -58,7 +58,7 @@ function show_report (){
     tput sgr0
 }
 
-
+echo -e "\n Showing Report\n"
 function show_report_pack_check (){
     printf "\n${lde// /=} Showing Logs ${lde// /=}\n"
     count=`awk 'END { print NR }' log/count.txt`  
@@ -68,12 +68,41 @@ function show_report_pack_check (){
         progressbar ${count} ${num_ip}
     done
 
-    final=`cat log/not_installed.txt`
-    if [[ -z ${final} ]]
+    echo -e "\n Showing Report\n"
+
+    failed_server=`cat log/failed_server.txt`
+    if [[ -z ${failed_server} ]]
     then
         echo -e ""
     else
-        echo -e "\n Showing Report\n"
+        echo -e "\n${R} Failed to Performe Operation on below server ${cross}${C}"
+        printf " ${ldd// /-} \n"
+        awk '{print NR " -",$0}' log/failed_server.txt
+        printf " ${ldd// /-} \n"
+    fi
+    echo -e "\n${Y} You can also check "log" dir for perticular server log ${C}"
+    tput sgr0
+
+        is_installed_pk=`cat log/is_installed_server.txt`
+    if [[ -z ${is_installed_pk} ]]
+    then
+    :
+    else
+        echo -e "\n${G} Package present for Below server.You can also check file is_installed_server.txt ${m100}\n${C}"
+        printf " ${ldd// /-} \n"
+        awk '{print NR " -",$0}' log/is_installed_server.txt
+        printf " ${ldd// /-} \n"
+    fi
+
+    #final=`awk '{printf $2}' log/not_installed.txt`
+    final=`cat log/not_installed.txt`
+    if [[ -z ${final} ]]
+    then
+        echo -e "${G}\n No Missing package found for below server\n${C} "
+        printf " ${ldd// /-} \n"        
+        awk '{print NR " -",$1}' log/is_installed_server.txt
+        printf " ${ldd// /-} \n"
+    else
         echo -e "\n${G} Found Missing package on below servers ${m100}${C}"
         printf " ${ldd// /-} \n"
         awk -e '{print NR " -\033[1;31m",$0}' log/not_installed.txt ;printf ${C}
@@ -93,18 +122,6 @@ function show_report_pack_check (){
         esac
 
     fi
-
-    failed_server=`cat log/failed_server.txt`
-    if [[ -z ${failed_server} ]]
-    then
-        echo -e ""
-    else
-        echo -e "\n${R} Failed to Performed Operation on below server ${cross}${C}"
-        printf " ${ldd// /-} \n"
-        awk '{print NR " -",$0}' log/failed_server.txt
-        printf " ${ldd// /-} \n"
-    fi
-    echo -e "\n${Y} You can also check "log" dir for perticular server log ${C}"
     tput sgr0
 
 }

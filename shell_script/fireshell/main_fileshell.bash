@@ -3,7 +3,6 @@ source modules/report.bash
 source modules/logo.bash
 initializer
 logo
-trap "echo You cannot quit app,please wait till it complete its JOB" SIGINT
 
 argument='-q -o BatchMode=yes -o StrictHostKeyChecking=no'
 bypass='-o StrictHostKeyChecking=no -O'
@@ -53,7 +52,7 @@ function pack_check_executer(){
 #### 4
 function pack_install_executer(){
    pack_details=`cat log/${1}_install_pkg.txt`
-   echo $pack_details
+   echo -e "\n Installing package ${pack_details} on ${1}"
    ssh ${argument} -i ${key} -p ${port} ${ssh_user}@${1} 'sudo -n bash -s' < modules/install_pkg.bash "${pack_details}" ;
 }
 
@@ -111,12 +110,18 @@ function pack_check_exec(){
     then
         is_installed=`awk '/is_installed/ {print $1}' ${log_path_pack_check}`
         not_installed=`awk '/not_installed/ {print $1}' ${log_path_pack_check}`
-        echo ${1} ${not_installed} >> log/not_installed.txt
-        echo ${not_installed} > log/${1}_install_pkg.txt
+
+         if [[ -z ${not_installed} ]]
+         then
+            :
+         else
+            echo ${1} ${not_installed} >> log/not_installed.txt
+            echo ${not_installed} > log/${1}_install_pkg.txt 
+            echo -e ${1} >> log/success_server_pkg_install.txt          
+         fi
         echo ${1} ${is_installed} >> log/is_installed_server.txt
-        echo -e ${1} >> log/success_server_pkg_install.txt
     else
-        echo -e "${BR} Connection or Some error occured for ${1} ${cross}${BY} moving to next server ${NC}\n"
+        echo -e "${R} Connection or Some error occured for ${1} ${cross}${Y} moving to next server ${C}\n"
         echo -e ${1} >> log/failed_server.txt
     fi
     echo "executed" >> log/count.txt
