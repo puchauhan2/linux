@@ -1,7 +1,7 @@
-packages=("lsof" "bc" "sysstat" "dmidecode" "virt-what" "brutils-2.7" );
 os_flavour_type=`hostnamectl | grep "Operating System" | awk '{print $3}'`;
 
 oracle_pkg() {
+    packages=("lsof" "bc" "sysstat" "dmidecode" "virt-what" "brutils-2.7" );
     for pkg in ${packages[@]};
      do check=`yum -q list installed $pkg 2>&1 /dev/null`; 
         if [ $? -ne 0 ]; then
@@ -13,7 +13,17 @@ oracle_pkg() {
 }
 
 Ubuntu_exec(){
-for pkg in ${packages[@]}; do
+
+version_id=`grep -i "VERSION_ID" /etc/os-release |awk -F'[^0-9]+' '{print $2}'`
+
+if [[ "${version_id}" == "16" ]] || [[ "${version_id}" == "17" ]] || [[ "${version_id}" == "18" ]] || [[ "${version_id}" == "19" ]]
+then
+declare -a arr_pkgs=("cifs-utils" "dmidecode" "dosfstools" "isc-dhcp-client" "gdisk" "nfs-common" "lsb-release" "iproute" "brutils")
+else
+declare -a arr_pkgs=("cifs-utils" "dmidecode" "dosfstools" "isc-dhcp-client" "gdisk" "nfs-common" "e2fsprogs" "iproute2" "lsb-release" "brutils")
+fi
+
+for pkg in ${arr_pkgs[@]}; do
     pkg_info=`apt list $pkg 2> /dev/null |grep -i installed | sed 's/\// /g'  | awk '{print $1}'`
     if [ "${pkg}" == "${pkg_info}" ]; then
 		echo "${pkg} is_installed"

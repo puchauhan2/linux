@@ -58,7 +58,6 @@ function show_report (){
     tput sgr0
 }
 
-echo -e "\n Showing Report\n"
 function show_report_pack_check (){
     printf "\n${lde// /=} Showing Logs ${lde// /=}\n"
     count=`awk 'END { print NR }' log/count.txt`  
@@ -75,7 +74,7 @@ function show_report_pack_check (){
     then
         echo -e ""
     else
-        echo -e "\n${R} Failed to Performe Operation on below server ${cross}${C}"
+        echo -e "\n${R} Failed to Perform Operation on below server ${cross}${C}"
         printf " ${ldd// /-} \n"
         awk '{print NR " -",$0}' log/failed_server.txt
         printf " ${ldd// /-} \n"
@@ -108,7 +107,7 @@ function show_report_pack_check (){
         awk -e '{print NR " -\033[1;31m",$0}' log/not_installed.txt ;printf ${C}
         printf " ${ldd// /-}\n "
 
-        echo -e "${C}\n Want to Proceed with Package installation ?\n Enter ${Y}Yes${C} to Proceed Or [CTRL + c]  to Exit${C}"
+        echo -e "${C}\n Want to Proceed with Package installation ?\n Enter ${Y}Yes${C} to Proceed Or ${Y}[CTRL + c]${C}  to Exit${C}"
         read response
         case ${response} in
         "yes"|"Yes"|"Y"|"y")

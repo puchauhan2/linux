@@ -13,9 +13,11 @@ C='\033[0m'        # ${C}
 Y='\033[1;33m'     # ${Y}
 m100='\U01F4AF'
 cross='\u274c'
-ssh_user='ec2-user'  # Change your user name here 
+ssh_user='ubuntu'  # Change your user name here 
 key=./key.pem        # Fix your key file here
 port='22'            # Change port here
+
+trap "echo Script Terminated by User" SIGINT
 
 echo -e "\nPlease confirm mode of execution,type ${Y}Yes${C} for parallel server execution OR ${Y}No${C} for single sever execution\n"
 read mode
