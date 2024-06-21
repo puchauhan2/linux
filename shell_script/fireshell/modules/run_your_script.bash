@@ -1,1 +1,1 @@
-cat /etc/*release
+hostnamectl

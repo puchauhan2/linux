@@ -2,7 +2,6 @@
 source modules/report.bash
 source modules/logo.bash
 initializer
-logo
 
 argument='-q -o BatchMode=yes -o StrictHostKeyChecking=no'
 bypass='-o StrictHostKeyChecking=no -O'
@@ -60,7 +59,7 @@ function pack_install_executer(){
 
 ##### 5
 function scp_install_executer(){
-    scp -i ${key} ${bypass} package/* ${ssh_user}@${1}:/tmp/    
+    scp -i ${key} ${bypass} -P ${port} package/* ${ssh_user}@${1}:/tmp/    
 }
 #################### execution status check ##################
 #### 1
@@ -277,7 +276,7 @@ function menu (){
 echo -e "${G} \n########## Printing Menu ######### ${C}\n"
 echo -e "${Y} Press 1 Get System Info ${C}\n"
 echo -e "${Y} Press 2 To run your script ${C}\n"
-echo -e "${Y} Press 3 To run Package Check and install ${C}\n"
+echo -e "${Y} Press 3 To run Package Check and install for Discovery & Assesment ${C}\n"
 read -p "Please enter your choice OR Press CTRL + c to Exit " choice
 
 case ${choice} in

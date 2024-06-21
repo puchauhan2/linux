@@ -75,9 +75,9 @@ function show_report_pack_check (){
         echo -e ""
     else
         echo -e "\n${R} Failed to Perform Operation on below server ${cross}${C}"
-        printf " ${ldd// /-} \n"
+        printf " ${ldd// /-} ${R}\n"
         awk '{print NR " -",$0}' log/failed_server.txt
-        printf " ${ldd// /-} \n"
+        printf "${C} ${ldd// /-} \n"
     fi
     echo -e "\n${Y} You can also check "log" dir for perticular server log ${C}"
     tput sgr0
@@ -87,25 +87,25 @@ function show_report_pack_check (){
     then
     :
     else
-        echo -e "\n${G} Package present for Below server.You can also check file is_installed_server.txt ${m100}\n${C}"
-        printf " ${ldd// /-} \n"
+        echo -e "\n${G} Package present for Below server.You can also check file is_installed_server.txt ${m100}${C}"
+        printf " ${ldd// /-} \n${G}"
         awk '{print NR " -",$0}' log/is_installed_server.txt
-        printf " ${ldd// /-} \n"
+        printf "${C} ${ldd// /-} \n"
     fi
 
     #final=`awk '{printf $2}' log/not_installed.txt`
     final=`cat log/not_installed.txt`
     if [[ -z ${final} ]]
     then
-        echo -e "${G}\n No Missing package found for below server\n${C} "
-        printf " ${ldd// /-} \n"        
+        echo -e "${G}\n No Missing package found for below server${C} "
+        printf " ${ldd// /-} ${G}\n"        
         awk '{print NR " -",$1}' log/is_installed_server.txt
-        printf " ${ldd// /-} \n"
+        printf "${C} ${ldd// /-} \n"
     else
-        echo -e "\n${G} Found Missing package on below servers ${m100}${C}"
-        printf " ${ldd// /-} \n"
-        awk -e '{print NR " -\033[1;31m",$0}' log/not_installed.txt ;printf ${C}
-        printf " ${ldd// /-}\n "
+        echo -e "\n${R} Found Missing package on below servers ${m100}${C}"
+        printf " ${ldd// /-} ${R}$\n"
+        awk -e '{print NR " -",$0}' log/not_installed.txt ;
+        printf "${C} ${ldd// /-}\n "
 
         echo -e "${C}\n Want to Proceed with Package installation ?\n Enter ${Y}Yes${C} to Proceed Or ${Y}[CTRL + c]${C}  to Exit${C}"
         read response
