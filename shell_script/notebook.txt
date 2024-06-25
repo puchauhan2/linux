@@ -1,0 +1,21 @@
+#https://et.engr.iupui.edu/~dskim/tutorials/bash-advanced/html/testconstructs.html
+
+# The (( ... )) construct evaluates and tests numerical expressions.
+# Exit status opposite from [ ... ] construct!
+
+
+(( 0 ))
+echo "Exit status of \"(( 0 ))\" is $?."         # 1
+
+(( 1 ))
+echo "Exit status of \"(( 1 ))\" is $?."         # 0
+
+(( 5 > 4 ))                                      # true
+echo "Exit status of \"(( 5 > 4 ))\" is $?."     # 0
+
+(( 5 > 9 ))                                      # false
+echo "Exit status of \"(( 5 > 9 ))\" is $?."     # 1
+
+
+(( 0 )) return code will be 1
+[[ 0 ]] retirn code will be 0
