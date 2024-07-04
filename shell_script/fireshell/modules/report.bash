@@ -103,7 +103,7 @@ function show_report_pack_check (){
         printf "${C} ${ldd// /-} \n"
     else
         echo -e "\n${R} Found Missing package on below servers ${m100}${C}"
-        printf " ${ldd// /-} ${R}$\n"
+        printf " ${ldd// /-} ${R}\n"
         awk -e '{print NR " -",$0}' log/not_installed.txt ;
         printf "${C} ${ldd// /-}\n "
 

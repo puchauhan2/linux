@@ -12,8 +12,8 @@ C='\033[0m'        # ${C}
 Y='\033[1;33m'     # ${Y}
 m100='\U01F4AF'
 cross='\u274c'
-ssh_user='ubuntu'  # Change your user name here 
-key=./key.pem        # Fix your key file here
+ssh_user='admin'  # Change your user name here 
+key=./keypair.pem        # Fix your key file here
 port='22'            # Change port here
 
 trap "echo Script Terminated by User" SIGINT
@@ -52,9 +52,9 @@ function pack_check_executer(){
 
 #### 4
 function pack_install_executer(){
-   pack_details=`cat log/${1}_install_pkg.txt`
-   echo -e "\n Installing package ${pack_details} on ${1}"
-   ssh ${argument} -i ${key} -p ${port} ${ssh_user}@${1} 'sudo -n bash -s' < modules/install_pkg.bash "${pack_details}" ;
+   pack_details_${1}=`cat log/${1}_install_pkg.txt`
+   echo -e "\n Installing package ${pack_details_${1}} on ${1}"
+   ssh ${argument} -i ${key} -p ${port} ${ssh_user}@${1} 'sudo -n bash -s' < modules/install_pkg.bash "${pack_details_${1}}" ;
 }
 
 ##### 5
@@ -111,6 +111,7 @@ function pack_check_exec(){
     then
         is_installed=`awk '/is_installed/ {print $1}' ${log_path_pack_check}`
         not_installed=`awk '/not_installed/ {print $1}' ${log_path_pack_check}`
+        full_os_name=`awk '/full_os_name/ {print $2}' ${log_path_pack_check}` # os name
 
          if [[ -z ${not_installed} ]]
          then

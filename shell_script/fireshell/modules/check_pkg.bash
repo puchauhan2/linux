@@ -1,4 +1,6 @@
 os_flavour_type=`hostnamectl | grep "Operating System" | awk '{print $3}'`;
+full_os_name=`hostnamectl | grep "Operating System" | awk '{for(i=3;i<=NF;++i) printf("%s ",  $i) }'`
+echo "full_os_name ${full_os_name}"
 
 oracle_pkg() {
     packages=("lsof" "bc" "sysstat" "dmidecode" "virt-what" "brutils-2.7" ); # Migration precheck array 
@@ -37,7 +39,7 @@ done
 case $os_flavour_type in 
 "Ubuntu") Ubuntu_exec;; 
 "CentOS") oracle_pkg ;; 
-"SUSE") echo "SUSE linux not supported" ;; 
+"SUSE") echo "SUSE linux not supported" ; exit 1 ;; 
 "Red") oracle_pkg ;; 
 "Oracle") oracle_pkg ;; 
 "Amazon") oracle_pkg ;; 
