@@ -23,37 +23,37 @@ oracle_pkg() {
     do 
     case ${pack} in
         "brutils-2.7")
-		    echo -e "{Y}Installing ${pack}{C}\n"
+		    echo -e "${Y}Installing ${pack}${C}\n"
 		    yum localinstall /tmp/brutils-2.7-1.el8.x86_64.rpm -y
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "lsof")
-		    echo -e "{Y}Installing ${pack}{C}\n"
+		    echo -e "${Y}Installing ${pack}${C}\n"
 		    yum localinstall /tmp/lsof-4.87-6.el7.x86_64.rpm -y
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "sysstat")
-		    echo -e "{Y}Installing ${pack}}{C}\n"
+		    echo -e "${Y}Installing ${pack}}${C}\n"
 		    yum localinstall /tmp/sysstat-10.1.5-20.el7_9.x86_64.rpm -y
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "dmidecode")
-		    echo -e "{y}Installing ${pack}{C}\n"
+		    echo -e "${y}Installing ${pack}${C}\n"
 		    yum localinstall /tmp/dmidecode-3.2-5.el7_9.1.x86_64.rpm -y
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "virt-what")
-		    echo -e "{y}Installing ${pack}{C}\n"
+		    echo -e "${y}Installing ${pack}${C}\n"
 		    yum localinstall /tmp/virt-what-1.18-4.el7_9.1.x86_64.rpm -y
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "bc")
-		    echo -e "{y}Installing ${pack}{C}\n"
+		    echo -e "${y}Installing ${pack}${C}\n"
 		    yum localinstall /tmp/brutils-2.7-1.el8.x86_64.rpm
             errorCode=${?}
             check_status ${errorCode} ${pack}
@@ -76,61 +76,61 @@ Ubuntu_exec(){
     do 
     case ${pack} in
         "brutils")
-		    echo -e "{Y}Installing ${pack}{C}\n"
+		    echo -e "${Y}Installing ${pack}${C}\n"
 		    apt install -y /tmp/brutils_2.7-0_amd64.deb
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "gdisk")
-		    echo -e "{Y}Installing ${pack}{C}\n"
+		    echo -e "${Y}Installing ${pack}${C}\n"
 		    apt install -y ${pack}
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "iproute2")
-		    echo -e "{Y}Installing ${pack}{C}\n"
+		    echo -e "${Y}Installing ${pack}${C}\n"
 		    apt install -y ${pack}
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "dmidecode")
-		    echo -e "{Y}Installing ${pack}{C}\n"
+		    echo -e "${Y}Installing ${pack}${C}\n"
 		    apt install -y ${pack}
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "dosfstools")
-		    echo -e "{Y}Installing ${pack}{C}\n"
+		    echo -e "${Y}Installing ${pack}${C}\n"
 		    apt install -y ${pack}
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "lsb-release")
-		    echo -e "{Y}Installing ${pack}{C}\n"
+		    echo -e "${Y}Installing ${pack}${C}\n"
 		    apt install -y ${pack}
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "bc")
-		    echo -e "{Y}Installing ${pack}{C}\n"
+		    echo -e "${Y}Installing ${pack}${C}\n"
 		    apt install -y ${pack}
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "cifs-utils")
-		    echo -e "{Y}Installing ${pack}{C}\n"
+		    echo -e "${Y}Installing ${pack}${C}\n"
 		    apt install -y ${pack}
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "isc-dhcp-client")
-		    echo -e "{Y}Installing ${pack}{C}\n"
+		    echo -e "${Y}Installing ${pack}${C}\n"
 		    apt install -y ${pack}
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
         "nfs-common")
-		    echo -e "{Y}Installing ${pack}{C}\n"
+		    echo -e "${Y}Installing ${pack}${C}\n"
 		    apt install -y ${pack}
             errorCode=${?}
             check_status ${errorCode} ${pack}

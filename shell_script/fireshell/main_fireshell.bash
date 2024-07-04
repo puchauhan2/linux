@@ -12,8 +12,8 @@ C='\033[0m'        # ${C}
 Y='\033[1;33m'     # ${Y}
 m100='\U01F4AF'
 cross='\u274c'
-ssh_user='admin'  # Change your user name here 
-key=./keypair.pem        # Fix your key file here
+ssh_user='ec2-user'  # Change your user name here 
+key=./key.pem        # Fix your key file here
 port='22'            # Change port here
 
 trap "echo Script Terminated by User" SIGINT
@@ -52,9 +52,9 @@ function pack_check_executer(){
 
 #### 4
 function pack_install_executer(){
-   pack_details_${1}=`cat log/${1}_install_pkg.txt`
-   echo -e "\n Installing package ${pack_details_${1}} on ${1}"
-   ssh ${argument} -i ${key} -p ${port} ${ssh_user}@${1} 'sudo -n bash -s' < modules/install_pkg.bash "${pack_details_${1}}" ;
+   pack_details=`cat log/${1}_install_pkg.txt`
+   echo -e "\n Installing package ${pack_details} on ${1}"
+   ssh ${argument} -i ${key} -p ${port} ${ssh_user}@${1} 'sudo -n bash -s' < modules/install_pkg.bash "${pack_details}" ;
 }
 
 ##### 5
@@ -103,6 +103,7 @@ function pack_check_exec(){
 
     echo -e "${Y} Checking package on ${1}${C}"
     log_path_pack_check="log/pkg_result_${1}"
+    full_os_name=''
     pack_check_executer ${1} > ${log_path_pack_check}
 
     errorCodepackCheck=${?}
@@ -111,20 +112,22 @@ function pack_check_exec(){
     then
         is_installed=`awk '/is_installed/ {print $1}' ${log_path_pack_check}`
         not_installed=`awk '/not_installed/ {print $1}' ${log_path_pack_check}`
-        full_os_name=`awk '/full_os_name/ {print $2}' ${log_path_pack_check}` # os name
+        full_os_name=`awk '/full_os_name/ {print $2 $3}' ${log_path_pack_check}` # os name
 
          if [[ -z ${not_installed} ]]
          then
             :
          else
-            echo ${1} ${not_installed} >> log/not_installed.txt
-            echo ${not_installed} > log/${1}_install_pkg.txt 
+            echo -e ${1} ${Y}${full_os_name}${C}${R} ${not_installed} >> log/not_installed.txt
+            echo -e ${not_installed} > log/${1}_install_pkg.txt 
             echo -e ${1} >> log/success_server_pkg_install.txt          
          fi
-        echo ${1} ${is_installed} >> log/is_installed_server.txt
+        echo -e ${1} ${Y}${full_os_name}${C}${G} ${is_installed} >> log/is_installed_server.txt
     else
         echo -e "${R} Connection or Some error occured for ${1} ${cross}${Y} moving to next server ${C}\n"
-        echo -e ${1} >> log/failed_server.txt
+        echo -e "Printing hostname ${Y}${full_os_name}"
+        full_os_name=`awk '/full_os_name/ {print $2 $3}' ${log_path_pack_check}` # os name
+        echo -e ${1} ${Y}${full_os_name}${C} >> log/failed_server.txt
     fi
     echo "executed" >> log/count.txt
 }
@@ -151,7 +154,7 @@ function pack_install_exec(){
 
    if [[ ${errorPackInstall} = 0 ]] && [[ ${errorPackSend} = 0 ]]
    then
-      echo -e "${G} Installation successfully on ${1}${C}"
+      echo -e "${G} Few or all Installation are successfull on ${1},it is recommend to re-run scan${C}"
       echo -e ${1} >> log/success_server.txt
    else
       echo -e "${R} Connection or Some error occured for ${1} ${cross}${Y} moving to next server ${C}\n"

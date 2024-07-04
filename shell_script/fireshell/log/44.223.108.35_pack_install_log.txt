@@ -1,0 +1,274 @@
+
+
+######################### Thu Jul  4 12:31:36 IST 2024 #########################
+
+ Sending Packages to 44.223.108.35
+[1;32m Package copied successfully on 44.223.108.35[0m
+[1;33m Installing package on 44.223.108.35[0m
+main_fireshell.bash: line 55: pack_details_44.223.108.35=lsof: command not found
+main_fireshell.bash: line 56: \n Installing package ${pack_details_${1}} on ${1}: bad substitution
+
+
+######################### Thu Jul  4 12:35:11 IST 2024 #########################
+
+ Sending Packages to 44.223.108.35
+[1;32m Package copied successfully on 44.223.108.35[0m
+[1;33m Installing package on 44.223.108.35[0m
+
+ Installing package lsof bc sysstat brutils-2.7 on 44.223.108.35
+Operating System: Red Hat Enterprise Linux 9.4 (Plow)
+{Y}Installing lsof{C}
+
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+Red Hat Enterprise Linux 9 for x86_64 - AppStre  85 kB/s | 4.5 kB     00:00    
+Red Hat Enterprise Linux 9 for x86_64 - BaseOS   78 kB/s | 4.1 kB     00:00    
+Red Hat Enterprise Linux 9 Client Configuration  30 kB/s | 1.5 kB     00:00    
+Dependencies resolved.
+================================================================================
+ Package       Architecture    Version              Repository             Size
+================================================================================
+Installing:
+ lsof          x86_64          4.87-6.el7           @commandline          331 k
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total size: 331 k
+Installed size: 927 k
+Downloading Packages:
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : lsof-4.87-6.el7.x86_64                                 1/1 
+  Running scriptlet: lsof-4.87-6.el7.x86_64                                 1/1 
+  Verifying        : lsof-4.87-6.el7.x86_64                                 1/1 
+Installed products updated.
+
+Installed:
+  lsof-4.87-6.el7.x86_64                                                        
+
+Complete!
+[1;32mSucessfully installed package lsof[0m
+{y}Installing bc{C}
+
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+Last metadata expiration check: 0:00:03 ago on Thu 04 Jul 2024 07:05:26 AM UTC.
+Dependencies resolved.
+================================================================================
+ Package             Arch     Version           Repository                 Size
+================================================================================
+Installing:
+ brutils             x86_64   2.7-1.el8         @commandline              797 k
+Installing dependencies:
+ attr                x86_64   2.5.1-3.el9       rhel-9-baseos-rhui-rpms    65 k
+ bc                  x86_64   1.07.1-14.el9     rhel-9-baseos-rhui-rpms   125 k
+ mtools              x86_64   4.0.26-4.el9_0    rhel-9-baseos-rhui-rpms   226 k
+ syslinux            x86_64   6.04-0.20.el9     rhel-9-baseos-rhui-rpms   575 k
+ syslinux-nonlinux   noarch   6.04-0.20.el9     rhel-9-baseos-rhui-rpms   578 k
+
+Transaction Summary
+================================================================================
+Install  6 Packages
+
+Total size: 2.3 M
+Total download size: 1.5 M
+Installed size: 5.9 M
+Is this ok [y/N]: Operation aborted.
+[1;31mUnable to install package bc[0m
+{Y}Installing sysstat}{C}
+
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+Last metadata expiration check: 0:00:06 ago on Thu 04 Jul 2024 07:05:26 AM UTC.
+(try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages)
+Error: 
+ Problem: conflicting requests
+  - nothing provides fileutils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+  - nothing provides sh-utils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+  - nothing provides textutils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+[1;31mUnable to install package sysstat[0m
+{Y}Installing brutils-2.7{C}
+
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+Last metadata expiration check: 0:00:10 ago on Thu 04 Jul 2024 07:05:26 AM UTC.
+Dependencies resolved.
+================================================================================
+ Package             Arch     Version           Repository                 Size
+================================================================================
+Installing:
+ brutils             x86_64   2.7-1.el8         @commandline              797 k
+Installing dependencies:
+ attr                x86_64   2.5.1-3.el9       rhel-9-baseos-rhui-rpms    65 k
+ bc                  x86_64   1.07.1-14.el9     rhel-9-baseos-rhui-rpms   125 k
+ mtools              x86_64   4.0.26-4.el9_0    rhel-9-baseos-rhui-rpms   226 k
+ syslinux            x86_64   6.04-0.20.el9     rhel-9-baseos-rhui-rpms   575 k
+ syslinux-nonlinux   noarch   6.04-0.20.el9     rhel-9-baseos-rhui-rpms   578 k
+
+Transaction Summary
+================================================================================
+Install  6 Packages
+
+Total size: 2.3 M
+Total download size: 1.5 M
+Installed size: 5.9 M
+Downloading Packages:
+(1/5): attr-2.5.1-3.el9.x86_64.rpm              1.0 MB/s |  65 kB     00:00    
+(2/5): mtools-4.0.26-4.el9_0.x86_64.rpm         3.3 MB/s | 226 kB     00:00    
+(3/5): bc-1.07.1-14.el9.x86_64.rpm              1.7 MB/s | 125 kB     00:00    
+(4/5): syslinux-nonlinux-6.04-0.20.el9.noarch.r  28 MB/s | 578 kB     00:00    
+(5/5): syslinux-6.04-0.20.el9.x86_64.rpm         24 MB/s | 575 kB     00:00    
+--------------------------------------------------------------------------------
+Total                                            13 MB/s | 1.5 MB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1 
+  Installing       : mtools-4.0.26-4.el9_0.x86_64                           1/6 
+  Installing       : syslinux-nonlinux-6.04-0.20.el9.noarch                 2/6 
+  Installing       : syslinux-6.04-0.20.el9.x86_64                          3/6 
+  Installing       : bc-1.07.1-14.el9.x86_64                                4/6 
+  Installing       : attr-2.5.1-3.el9.x86_64                                5/6 
+  Running scriptlet: brutils-2.7-1.el8.x86_64                               6/6 
+  Installing       : brutils-2.7-1.el8.x86_64                               6/6 
+  Running scriptlet: brutils-2.7-1.el8.x86_64                               6/6 
+  Verifying        : attr-2.5.1-3.el9.x86_64                                1/6 
+  Verifying        : bc-1.07.1-14.el9.x86_64                                2/6 
+  Verifying        : mtools-4.0.26-4.el9_0.x86_64                           3/6 
+  Verifying        : syslinux-nonlinux-6.04-0.20.el9.noarch                 4/6 
+  Verifying        : syslinux-6.04-0.20.el9.x86_64                          5/6 
+  Verifying        : brutils-2.7-1.el8.x86_64                               6/6 
+Installed products updated.
+
+Installed:
+  attr-2.5.1-3.el9.x86_64            bc-1.07.1-14.el9.x86_64                    
+  brutils-2.7-1.el8.x86_64           mtools-4.0.26-4.el9_0.x86_64               
+  syslinux-6.04-0.20.el9.x86_64      syslinux-nonlinux-6.04-0.20.el9.noarch     
+
+Complete!
+[1;32mSucessfully installed package brutils-2.7[0m
+[1;32m Installation successfully on 44.223.108.35[0m
+
+
+######################### Thu Jul  4 12:37:06 IST 2024 #########################
+
+ Sending Packages to 44.223.108.35
+[1;32m Package copied successfully on 44.223.108.35[0m
+[1;33m Installing package on 44.223.108.35[0m
+
+ Installing package sysstat on 44.223.108.35
+Operating System: Red Hat Enterprise Linux 9.4 (Plow)
+{Y}Installing sysstat}{C}
+
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+Last metadata expiration check: 0:01:55 ago on Thu 04 Jul 2024 07:05:26 AM UTC.
+(try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages)
+Error: 
+ Problem: conflicting requests
+  - nothing provides fileutils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+  - nothing provides sh-utils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+  - nothing provides textutils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+[1;31mUnable to install package sysstat[0m
+[1;32m Installation successfully on 44.223.108.35[0m
+
+
+######################### Thu Jul  4 12:42:20 IST 2024 #########################
+
+ Sending Packages to 44.223.108.35
+[1;32m Package copied successfully on 44.223.108.35[0m
+[1;33m Installing package on 44.223.108.35[0m
+
+ Installing package sysstat on 44.223.108.35
+Operating System: Red Hat Enterprise Linux 9.4 (Plow)
+[1;33mInstalling sysstat}[0m
+
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+Last metadata expiration check: 0:07:09 ago on Thu 04 Jul 2024 07:05:26 AM UTC.
+(try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages)
+Error: 
+ Problem: conflicting requests
+  - nothing provides fileutils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+  - nothing provides sh-utils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+  - nothing provides textutils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+[1;31mUnable to install package sysstat[0m
+[1;32m Installation successfully on 44.223.108.35[0m
+
+
+######################### Thu Jul  4 17:37:11 IST 2024 #########################
+
+ Sending Packages to 44.223.108.35
+[1;32m Package copied successfully on 44.223.108.35[0m
+[1;33m Installing package on 44.223.108.35[0m
+
+ Installing package sysstat on 44.223.108.35
+Operating System: Red Hat Enterprise Linux 9.4 (Plow)
+[1;33mInstalling sysstat}[0m
+
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+Last metadata expiration check: 1:40:45 ago on Thu 04 Jul 2024 10:26:42 AM UTC.
+(try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages)
+Error: 
+ Problem: conflicting requests
+  - nothing provides fileutils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+  - nothing provides sh-utils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+  - nothing provides textutils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+[1;31mUnable to install package sysstat[0m
+[1;32m Few or all Installation are successfull on ,it is recommend to re-run scan44.223.108.35[0m
+
+
+######################### Thu Jul  4 17:40:53 IST 2024 #########################
+
+ Sending Packages to 44.223.108.35
+[1;32m Package copied successfully on 44.223.108.35[0m
+[1;33m Installing package on 44.223.108.35[0m
+
+ Installing package sysstat on 44.223.108.35
+Operating System: Red Hat Enterprise Linux 9.4 (Plow)
+[1;33mInstalling sysstat}[0m
+
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+Last metadata expiration check: 1:44:26 ago on Thu 04 Jul 2024 10:26:42 AM UTC.
+(try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages)
+Error: 
+ Problem: conflicting requests
+  - nothing provides fileutils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+  - nothing provides sh-utils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+  - nothing provides textutils needed by sysstat-10.1.5-20.el7_9.x86_64 from @commandline
+[1;31mUnable to install package sysstat[0m
+[1;32m Few or all Installation are successfull on 44.223.108.35,it is recommend to re-run scan[0m

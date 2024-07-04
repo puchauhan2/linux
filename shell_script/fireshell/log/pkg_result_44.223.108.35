@@ -1,0 +1,7 @@
+full_os_name Red Hat Enterprise Linux 9.4 (Plow) 
+lsof not_installed.
+bc not_installed.
+sysstat not_installed.
+dmidecode not_installed.
+virt-what not_installed.
+brutils-2.7 not_installed.

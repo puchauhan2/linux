@@ -79,7 +79,7 @@ function show_report_pack_check (){
         awk '{print NR " -",$0}' log/failed_server.txt
         printf "${C} ${ldd// /-} \n"
     fi
-    echo -e "\n${Y} You can also check "log" dir for perticular server log ${C}"
+    echo -e "\n${Y} You can also check "log" dir for particular server log ${C}"
     tput sgr0
 
         is_installed_pk=`cat log/is_installed_server.txt`
