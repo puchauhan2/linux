@@ -4,6 +4,7 @@ source modules/logo.bash
 initializer
 
 argument='-q -o BatchMode=yes -o StrictHostKeyChecking=no'
+
 bypass='-o StrictHostKeyChecking=no -O'
 
 R='\033[1;31m'     # ${R}
@@ -12,8 +13,8 @@ C='\033[0m'        # ${C}
 Y='\033[1;33m'     # ${Y}
 m100='\U01F4AF'
 cross='\u274c'
-ssh_user='ec2-user'  # Change your user name here 
-key=./key.pem        # Fix your key file here
+ssh_user='admin'  # Change your user name here 
+key=./keypair.pem        # Fix your key file here
 port='22'            # Change port here
 
 trap "echo Script Terminated by User" SIGINT

@@ -135,6 +135,18 @@ Ubuntu_exec(){
             errorCode=${?}
             check_status ${errorCode} ${pack}
         ;;
+        "sysstat")
+		    echo -e "${Y}Installing ${pack}${C}\n"
+		    apt install -y ${pack}
+            errorCode=${?}
+            check_status ${errorCode} ${pack}
+        ;;
+        "virt-what")
+		    echo -e "${Y}Installing ${pack}${C}\n"
+		    apt install -y ${pack}
+            errorCode=${?}
+            check_status ${errorCode} ${pack}
+        ;;
         *)
 		    echo -e "${R} Package not found ${C}";
 		    exit 1

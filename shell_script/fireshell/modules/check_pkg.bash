@@ -21,9 +21,9 @@ version_id=`grep -i "VERSION_ID" /etc/os-release |awk -F'[^0-9]+' '{print $2}'`
 
 if [[ "${version_id}" == "16" ]] || [[ "${version_id}" == "17" ]] || [[ "${version_id}" == "18" ]] || [[ "${version_id}" == "19" ]]
 then
-declare -a arr_pkgs=("cifs-utils" "dmidecode" "dosfstools" "isc-dhcp-client" "gdisk" "nfs-common" "lsb-release" "iproute" "brutils")
+declare -a arr_pkgs=("cifs-utils" "sysstat" "virt-what" "dmidecode" "dosfstools" "isc-dhcp-client" "gdisk" "nfs-common" "lsb-release" "iproute" "brutils")
 else
-declare -a arr_pkgs=("cifs-utils" "dmidecode" "dosfstools" "isc-dhcp-client" "gdisk" "nfs-common" "e2fsprogs" "iproute2" "lsb-release" "brutils")
+declare -a arr_pkgs=("cifs-utils" "sysstat" "dmidecode" "virt-what" "dosfstools" "isc-dhcp-client" "gdisk" "nfs-common" "e2fsprogs" "iproute2" "lsb-release" "brutils")
 fi
 
 for pkg in ${arr_pkgs[@]}; do
