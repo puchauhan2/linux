@@ -4,7 +4,7 @@ echo "full_os_name ${full_os_name}"
 
 oracle_pkg() {
     packages=("lsof" "bc" "sysstat" "dmidecode" "virt-what" "brutils-2.7" ); # Migration precheck array 
-    #packages=("lsof" "bc" "sysstat" "dmidecode" "virt-what"  ); # Assesment precheck array 
+    #packages=("lsof" "bc" "sysstat" "dmidecode" "virt-what" ); # Assesment precheck array 
     for pkg in ${packages[@]};
      do check=`yum -q list installed $pkg 2>&1 /dev/null`; 
         if [ $? -ne 0 ]; then
