@@ -1,0 +1,13 @@
+Test-NetConnection -ComputerName source ip  -Port 5986
+
+winrm enumerate winrm/config/listener
+winrm get winrm/config/service
+
+cifs-utils, dhclient, dmidecode, dosfs tools, gdisk, nfs-utils, iproute, tar, brutils-2.7 -- migration
+
+"lsof" "bc" "sysstat" "dmidecode" "virt-what" -- assesment
+
+ibxml2- devel, sysvinit-tools SUES15
+
+windows 445 -winrm,5986
+linux 22 ,2049

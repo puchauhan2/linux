@@ -136,6 +136,7 @@ case $os_flavour_type in
 "SUSE") echo "SUSE linux not supported" ;; 
 "Red") oracle_pkg ;; 
 "Oracle") oracle_pkg ;; 
-"Amazon") oracle_pkg ;; 
+"Amazon") oracle_pkg ;;
+"Rocky") oracle_pkg ;; 
 *) echo -e "OS Type not detected ";; 
 esac
