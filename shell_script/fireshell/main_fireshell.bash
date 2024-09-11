@@ -13,8 +13,8 @@ C='\033[0m'        # ${C}
 Y='\033[1;33m'     # ${Y}
 m100='\U01F4AF'
 cross='\u274c'
-ssh_user='admin'  # Change your user name here 
-key=./keypair.pem        # Fix your key file here
+ssh_user='ec2-user'  # Change your user name here 
+key=./key.pem        # Fix your key file here
 port='22'            # Change port here
 
 trap "echo Script Terminated by User" SIGINT
@@ -155,7 +155,7 @@ function pack_install_exec(){
 
    if [[ ${errorPackInstall} = 0 ]] && [[ ${errorPackSend} = 0 ]]
    then
-      echo -e "${G} Few or all Installation are successfull on ${1},it is recommend to re-run scan${C}"
+      echo -e "${G} All Installation are successfull on ${1} but it is recommend to re-run scan${C}"
       echo -e ${1} >> log/success_server.txt
    else
       echo -e "${R} Connection or Some error occured for ${1} ${cross}${Y} moving to next server ${C}\n"
@@ -281,7 +281,7 @@ function menu (){
 echo -e "${G} \n########## Printing Menu ######### ${C}\n"
 echo -e "${Y} Press 1 Get System Info ${C}\n"
 echo -e "${Y} Press 2 To run your script ${C}\n"
-echo -e "${Y} Press 3 To run Package Check and install for Discovery & Assesment ${C}\n"
+echo -e "${Y} Press 3 To run Package Check and install preckeck packages ${C}\n"
 read -p "Please enter your choice OR Press CTRL + c to Exit " choice
 
 case ${choice} in

@@ -13,8 +13,8 @@ C='\033[0m'        # ${C}
 Y='\033[1;33m'     # ${Y}
 m100='\U01F4AF'
 cross='\u274c'
-ssh_user='ec2-user'  # Change your user name here 
-key=./key.pem        # Fix your key file here
+ssh_user='rocky'  # Change your user name here 
+key=./account_vending_puneet.pem        # Fix your key file here
 port='22'            # Change port here
 
 trap "echo Script Terminated by User" SIGINT
@@ -127,8 +127,7 @@ function pack_check_exec(){
     else
         echo -e "${R} Connection or Some error occured for ${1} ${cross}${Y} moving to next server ${C}\n"
         echo -e "Printing hostname ${Y}${full_os_name}"
-        full_os_name=`awk '/full_os_name/ {print $2 $3}' ${log_path_pack_check}` # os name
-        echo -e ${1} ${Y}${full_os_name}${C} >> log/failed_server.txt
+        echo -e ${1} ${Y}${full_os_name}${C}${R} >> log/failed_server.txt
     fi
     echo "executed" >> log/count.txt
 }
